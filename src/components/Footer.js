@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Footer = () =>(
-    <div>
-    <p>Criado por: Lucas Grober</p>
+    <div className=" footer">
+    <p clasName="container">Criado por: Lucas Grober</p>
     </div>
 );
 
