@@ -4,6 +4,7 @@ import Action from './Action';
 import Header from './Header';
 import Options from './Options';
 import OptionModal from './OptionModal';
+import Footer from './Footer';
 
 export default class IndecisionApp extends React.Component {
   state = {
@@ -86,6 +87,7 @@ export default class IndecisionApp extends React.Component {
           selectedOption={this.state.selectedOption}
           handleClearSelectedOption={this.handleClearSelectedOption}
         />
+        <Footer />
       </div>
     );
   }
