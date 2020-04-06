@@ -1,19 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import IndecisionApp from './components/IndecisionApp.js';
+import { Provider } from 'react-redux';
+import AppRouter from './routers/AppRouter'
+import configureStore from "./store/configureStore"
+import  { addExpense } from './actions/expenses';
+import { setTextFilter } from './actions/filters';
+import GetVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+const store = configureStore();
 
-/*new class syntax
-class NewSyntax {
-  name="lucas";
-  getGreeting = () => {
-    return `meu nome é ${this.name}`;
-  }
-}
-const newS = new NewSyntax();
-const getGreeting = newS.getGreeting;
-console.log(getGreeting());
-*/
+store.dispatch(addExpense({description: 'Water bill', amount:4500}));
+store.dispatch(addExpense({description: 'Gas bill', createdAt: 1000}))
+store.dispatch(addExpense({description: 'Rent', amount:109500}));
+
+const state = store.getState();
+const visibleExpenses = GetVisibleExpenses(state.expenses, state.filters);
+console.log(state);
+
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+)
+
+ReactDOM.render(jsx, document.getElementById('app'));
